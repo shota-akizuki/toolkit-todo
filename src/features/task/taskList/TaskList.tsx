@@ -1,14 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import TaskItem from "../taskItem/TaskItem";
+import sampleData from "./sampleData.json";
 import styles from "./TaskList.module.scss";
 
 const TaskList: React.FC = () => {
-  // const { tasks } = useSelector((state: RootState) => state.task);
   return (
-    <div className={styles.wrapper}>
-      {/* {TaskList.map((task) => (
+    <div className={styles.root}>
+      {sampleData.map((task) => (
         <TaskItem key={task.id} task={task} />
-      ))} */}
+      ))}
     </div>
   );
 };

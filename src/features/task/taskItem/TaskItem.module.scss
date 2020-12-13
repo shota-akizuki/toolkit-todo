@@ -1,4 +1,4 @@
-.wrapper {
+.root {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -8,33 +8,34 @@
   margin-bottom: 10px;
 
   .title {
-      display: flex;
-      align-items: center;
+    display: flex;
+    align-items: center;
 
-      .title_text {
-          margin-left: 10px;
-      }
+    .title_text {
+      margin-left: 10px;
+    }
   }
 
   .right_item {
-      display: flex;
-      align-items: center;
-      
-      .edit_button, .delete_button {
-          border: none;
-          border-radius: 5px;
-          background-color: #f1f2f7;
-          cursor: pointer;
+    display: flex;
+    align-items: center;
 
-          .icon {
-              width: 20px;
-              color: #282828;
-          }
-      }
+    .edit_button,
+    .delete_button {
+      border: none;
+      border-radius: 5px;
+      background-color: #f1f2f7;
+      cursor: pointer;
 
-      .edit_button {
-          margin-right: 5px;
+      .icon {
+        width: 20px;
+        color: #282828;
       }
+    }
+
+    .edit_button {
+      margin-right: 5px;
+    }
   }
 }
 
@@ -44,22 +45,22 @@
   align-items: center;
 
   .modal_content {
-      background: #FFFFFF;
-      width: 40vw;
-      height: 40vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border-radius: 5px;
-      
-      &:focus {
-          outline: none;
-      }
+    background: #ffffff;
+    width: 40vw;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
 
-      .modal_title {
-          margin-bottom: 20px;
-          font-size: 20px;
-      }
+    &:focus {
+      outline: none;
+    }
+
+    .modal_title {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
   }
 }
