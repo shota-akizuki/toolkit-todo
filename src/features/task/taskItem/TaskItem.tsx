@@ -10,12 +10,23 @@ import EventNoteIcon from "@material-ui/icons/EventNote";
 import styles from "./TaskItem.module.scss";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import Modal from "@material-ui/core/Modal";
+import TaskForm from "../taskForm/TaskForm";
 
 interface PropTypes {
   task: { id: number; title: string; completed: boolean };
 }
 
 const TaskItem: React.FC<PropTypes> = ({ task }) => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div className={styles.root}>
       <div className={styles.title}>
@@ -28,10 +39,7 @@ const TaskItem: React.FC<PropTypes> = ({ task }) => {
           onClick={() => console.log("check${task.id}")}
           className={styles.checkbox}
         />
-        <button
-          onClick={() => console.log("edit${task.id}")}
-          className={styles.edit_button}
-        >
+        <button onClick={handleOpen} className={styles.edit_button}>
           <EditIcon className={styles.icon} />
         </button>
         <button
@@ -41,6 +49,15 @@ const TaskItem: React.FC<PropTypes> = ({ task }) => {
           <DeleteIcon className={styles.icon} />
         </button>
       </div>
+      <Modal className={styles.modal} open={open} onClose={handleClose}>
+        <div className={styles.modal_content}>
+          <div className={styles.modal_title}>Edit</div>
+          <TaskForm
+            //edit機能を持ったTaskFormだと示すためにedit propsを渡す
+            edit
+          />
+        </div>
+      </Modal>
     </div>
   );
 };
