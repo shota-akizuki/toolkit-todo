@@ -1,15 +1,11 @@
 import React from "react";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
+import { useDispatch, useSelector } from "react-redux";
 import Checkbox from "@material-ui/core/Checkbox";
-import IconButton from "@material-ui/core/IconButton";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import styles from "./TaskItem.module.scss";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import { selectTask, handleModalOpen, selectIsModalOpen } from "../taskSlice";
 import Modal from "@material-ui/core/Modal";
 import TaskForm from "../taskForm/TaskForm";
 
@@ -18,14 +14,18 @@ interface PropTypes {
 }
 
 const TaskItem: React.FC<PropTypes> = ({ task }) => {
-  const [open, setOpen] = React.useState(false);
+  //Reactで管理されているisModalの状態をここで呼び出している
+  const isModalOpen = useSelector(selectIsModalOpen);
+  //dispatchの呼び出し
+  const dispatch = useDispatch();
 
   const handleOpen = () => {
-    setOpen(true);
+    dispatch(selectTask(task));
+    dispatch(handleModalOpen(true));
   };
 
   const handleClose = () => {
-    setOpen(false);
+    dispatch(handleModalOpen(false));
   };
   return (
     <div className={styles.root}>
@@ -49,7 +49,7 @@ const TaskItem: React.FC<PropTypes> = ({ task }) => {
           <DeleteIcon className={styles.icon} />
         </button>
       </div>
-      <Modal className={styles.modal} open={open} onClose={handleClose}>
+      <Modal className={styles.modal} open={isModalOpen} onClose={handleClose}>
         <div className={styles.modal_content}>
           <div className={styles.modal_title}>Edit</div>
           <TaskForm

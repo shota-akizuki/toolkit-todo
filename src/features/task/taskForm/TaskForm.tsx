@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import styles from "./TaskForm.module.scss";
 import TextField from "@material-ui/core/TextField";
 import { useForm } from "react-hook-form";
-import { createTask } from "../taskSlice";
+import { createTask, handleModalOpen } from "../taskSlice";
 //型定義
 type Inputs = {
   taskTitle: string;
@@ -52,8 +52,8 @@ const TaskForm: React.FC<PropsTypes> = ({ edit }) => {
               Submit
             </button>
             <button
-              //何かデータを渡すわけでないので、
               type="button"
+              onClick={() => dispatch(handleModalOpen(false))}
               className={styles.cancel_button}
             >
               Cancel

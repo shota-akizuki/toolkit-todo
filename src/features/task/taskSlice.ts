@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { title } from "process";
-import { useSelector } from "react-redux";
 import { AppThunk, RootState } from "../../app/store";
 
 //ここ変数の定義ではなく型の指定
@@ -37,20 +35,33 @@ export const taskSlice = createSlice({
         title: action.payload,
         completed: false,
       };
-      //...スプレッド構文→ググる
+      //...スプレッド構文
       state.tasks = [newTask, ...state.tasks];
+    },
+    //どのtaskを選択しているかん管理
+    selectTask: (state, action) => {
+      state.selectedTask = action.payload;
+    },
+    //Modalを開くか閉じるかのフラグ管理
+    handleModalOpen: (state, action) => {
+      state.isModalOpen = action.payload;
     },
   },
 });
 
 //本来はactionsは別で定義するが、toolkitのおかげでここに書ける
 //task/createTaskという型が生成される
-export const { createTask } = taskSlice.actions;
+export const { createTask, selectTask, handleModalOpen } = taskSlice.actions;
 
 //useSelector(selectTask)でReactのコンポーネントに値を渡せる
-export const selectTask = (state: RootState): TaskState["tasks"] =>
+export const selectTasks = (state: RootState): TaskState["tasks"] =>
   state.task.tasks;
 
-export default taskSlice.reducer;
+export const selectIsModalOpen = (state: RootState): TaskState["isModalOpen"] =>
+  state.task.isModalOpen;
 
-//これはcounterフォルダにあるcounteSlice.tsxのこぴぺ
+export const selectSelectedTask = (
+  state: RootState
+): TaskState["selectedTask"] => state.task.selectedTask;
+
+export default taskSlice.reducer;
